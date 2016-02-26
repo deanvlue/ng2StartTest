@@ -1,0 +1,13 @@
+{
+  "dev":{
+    "driver": "mysql",
+    "user": "jcmunoz",
+    "database":"tutorial",
+    "password": "Alsea.15"
+  },
+  "production":{
+     "driver": "mysql",
+    "user": "jcmunoz",
+    "database":"tutorial"    
+  }
+}
