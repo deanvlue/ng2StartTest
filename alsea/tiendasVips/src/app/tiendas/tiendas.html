@@ -1,0 +1,35 @@
+<div class="col-lg-4">
+  <div class="panel panel-danger">
+    <div class="panel-heading"><b>{{estatus.peligro}}</b> Sin enviar</div>
+    <div class="panel-body">
+      <div ng-repeat="danger in resumen.danger">
+        <span class="tienda danger"><b>{{danger.fiidtienda}} - {{danger.fcnombre}}</b></span>
+        <div class="fechamini">{{danger.fdultimoenvio}}</div>         
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-4">
+  <div class="panel panel-warning">
+    <div class="panel-heading"><b>{{estatus.alerta}}</b> Revisar</div>
+    <div class="panel-body">
+      <div class="tienda" ng-repeat="warning in resumen.warning">
+        {{warning.fiidtienda}} - {{warning.fcnombre}}<br/> 
+          <span class="fechamini">{{warning.fdultimoenvio}}</span>
+      </div>
+    </div>  
+  </div>
+</div>
+
+<div class="col-lg-4">
+  <div class="panel panel-success">
+    <div class="panel-heading"><b>{{estatus.ok}}</b> Enviando Datos</div>
+    <div class="panel-body">
+      <div class="tienda" ng-repeat="ok in resumen.success">
+        {{ok.fiidtienda}} - {{ok.fcnombre}}<br/> 
+          <span class="fechamini">{{ok.fdultimoenvio}}</span>
+      </div>
+    </div>
+  </div>
+</div>
