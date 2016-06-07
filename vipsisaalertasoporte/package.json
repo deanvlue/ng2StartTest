@@ -1,0 +1,16 @@
+{
+  "name": "nodesql",
+  "version": "1.0.0",
+  "description": "test node with tedious for execute sql sp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "carlos muñoz",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.11.1",
+    "tedious": "^1.13.2",
+    "sendgrid": "^1.9.2"
+  }
+}
