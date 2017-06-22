@@ -1,0 +1,358 @@
+---
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: "Starbucks Card API"
+host: "localhost:10010"
+basePath: "/"
+schemes:
+- "http"
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /card:
+    get:
+      tags:
+      - "card"
+      description: "get cards list"
+      operationId: "getAll"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/inline_response_default"
+      x-swagger-router-controller: "Card"
+    post:
+      tags:
+      - "card"
+      description: "add card to a list"
+      operationId: "save"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/body"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/inline_response_200_1"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/inline_response_default"
+      x-swagger-router-controller: "Card"
+    x-swagger-router-controller: "card"
+  /card/{id}:
+    get:
+      tags:
+      - "card"
+      description: "get a card"
+      operationId: "getOne"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/inline_response_default"
+      x-swagger-router-controller: "Card"
+    put:
+      tags:
+      - "card"
+      description: "update card"
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Card ID"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/body_1"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/inline_response_200_1"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/inline_response_default"
+      x-swagger-router-controller: "Card"
+    delete:
+      tags:
+      - "card"
+      description: "delete a movie"
+      operationId: "delMovie"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Movie Id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/inline_response_200_1"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/inline_response_default"
+      x-swagger-router-controller: "Card"
+    x-swagger-router-controller: "card"
+  /cards/{bin}/images:
+    get:
+      tags:
+      - "cards"
+      description: "looks up an art for an specific Bin Number"
+      operationId: "getByBin"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bin"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/inline_response_default"
+      x-swagger-router-controller: "Cards"
+    x-swagger-router-controller: "card"
+  /swagger:
+    x-swagger-pipe: "swagger_raw"
+definitions:
+  ErrorResponse:
+    required:
+    - "message"
+    properties:
+      message:
+        type: "string"
+  GetCardsListResponse:
+    required:
+    - "cards"
+    properties:
+      cards:
+        type: "array"
+        items:
+          $ref: "#/definitions/inline_response_200_cards"
+  GetCardResponse:
+    required:
+    - "active"
+    - "artUrl"
+    - "finalBin"
+    - "inicialBin"
+    properties:
+      id:
+        type: "string"
+      artUrl:
+        type: "string"
+      inicialBin:
+        type: "number"
+      finalBin:
+        type: "number"
+      active:
+        type: "boolean"
+  Card:
+    type: "object"
+    required:
+    - "active"
+    - "artUrl"
+    - "finalBin"
+    - "inicialBin"
+    - "promo"
+    properties:
+      promo:
+        type: "string"
+        description: "Nombre de la promoción se utiliza como nombre de archivo."
+      artUrl:
+        type: "string"
+        description: "URL del arte de la tarjeta"
+      inicialBin:
+        type: "number"
+        description: "Bin inicial corresponiente al arte de la tarjeta"
+      finalBin:
+        type: "number"
+        description: "Bin final correspondiente al arte de la tarjeta"
+      active:
+        type: "boolean"
+        description: "indica si el arte está activo"
+        default: true
+  GetCardByBinResponse:
+    required:
+    - "images"
+    properties:
+      images:
+        type: "array"
+        items:
+          $ref: "#/definitions/GetCardByBinResponse_images"
+  GeneralResponse:
+    type: "object"
+    required:
+    - "description"
+    - "success"
+    properties:
+      success:
+        type: "number"
+        description: "returns 1 if successful"
+      description:
+        type: "string"
+        description: "a short comment"
+  inline_response_200_cards:
+    properties:
+      id:
+        type: "string"
+      artUrl:
+        type: "string"
+      inicialBin:
+        type: "number"
+      finalBin:
+        type: "number"
+      active:
+        type: "boolean"
+  inline_response_200:
+    required:
+    - "cards"
+    properties:
+      cards:
+        type: "array"
+        items:
+          $ref: "#/definitions/inline_response_200_cards"
+  inline_response_default:
+    required:
+    - "message"
+    properties:
+      message:
+        type: "string"
+  body:
+    type: "object"
+    required:
+    - "active"
+    - "artUrl"
+    - "finalBin"
+    - "inicialBin"
+    - "promo"
+    properties:
+      promo:
+        type: "string"
+        description: "Nombre de la promoción se utiliza como nombre de archivo."
+      artUrl:
+        type: "string"
+        description: "URL del arte de la tarjeta"
+      inicialBin:
+        type: "number"
+        description: "Bin inicial corresponiente al arte de la tarjeta"
+      finalBin:
+        type: "number"
+        description: "Bin final correspondiente al arte de la tarjeta"
+      active:
+        type: "boolean"
+        description: "indica si el arte está activo"
+        default: true
+  inline_response_200_1:
+    required:
+    - "description"
+    - "success"
+    properties:
+      success:
+        type: "number"
+        description: "returns 1 if successful"
+      description:
+        type: "string"
+        description: "a short comment"
+  inline_response_200_2:
+    required:
+    - "active"
+    - "artUrl"
+    - "finalBin"
+    - "inicialBin"
+    properties:
+      id:
+        type: "string"
+      artUrl:
+        type: "string"
+      inicialBin:
+        type: "number"
+      finalBin:
+        type: "number"
+      active:
+        type: "boolean"
+  body_1:
+    type: "object"
+    required:
+    - "active"
+    - "artUrl"
+    - "finalBin"
+    - "inicialBin"
+    - "promo"
+    properties:
+      promo:
+        type: "string"
+        description: "Nombre de la promoción se utiliza como nombre de archivo."
+      artUrl:
+        type: "string"
+        description: "URL del arte de la tarjeta"
+      inicialBin:
+        type: "number"
+        description: "Bin inicial corresponiente al arte de la tarjeta"
+      finalBin:
+        type: "number"
+        description: "Bin final correspondiente al arte de la tarjeta"
+      active:
+        type: "boolean"
+        description: "indica si el arte está activo"
+        default: true
+  GetCardByBinResponse_images:
+    properties:
+      imageType:
+        type: "string"
+      uri:
+        type: "string"

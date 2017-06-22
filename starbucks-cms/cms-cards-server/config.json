@@ -1,0 +1,6 @@
+{
+    "STORAGE_NAME":"sbuxtstcard",
+    "STORAGE_KEY": "7Crypvcyzem0sKfpX5UlZrjSdJ475f0JO+KTMovya2wt8CbCtbqk9PSArhI4ZNXJZbevP38SyV18J2spM7hhOw==",
+    "PARTITION_KEY": "cards",
+    "TABLE_NAME": "tacards"
+}
